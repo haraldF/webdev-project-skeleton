@@ -1,22 +1,13 @@
 const projectElement = document.getElementById("projects");
-const repo = "haraldF/webdev-project-skeleton";
 
 async function getProjects() {
     let result = [];
 
-    const response = await fetch(`https://api.github.com/repos/${repo}/contents`);
+    const response = await fetch("dirs");
     if (!response.ok)
         throw new Error("Invalid response: " + response.statusText);
-    const reply = await response.json();
-    for (let entry of reply) {
-        if (entry.type !== "dir") {
-            continue;
-        }
-
-        result.push(entry.path);
-    }
-
-    return result;
+    const reply = await response.text();
+    const reply = reply.split("\n");
 }
 
 async function render() {
