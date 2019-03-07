@@ -7,7 +7,7 @@ async function getProjects() {
     if (!response.ok)
         throw new Error("Invalid response: " + response.statusText);
     const reply = await response.text();
-    return reply.split("\n");
+    return reply.trim().split("\n");
 }
 
 async function render() {
